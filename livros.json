@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "A Odisseia",
+    "autor": "Homero",
+    "paginas": 405,
+    "status": "Lendo"
+  },
+  {
+    "titulo": "A Divina Comédia",
+    "autor": "Dante Alighieri",
+    "paginas": 645,
+    "status": "Pendente"
+  },
+  {
+    "titulo": "O Pequeno Príncipe",
+    "autor": "Antoine de Saint-Exupéry",
+    "paginas": 278,
+    "status": "Pendente"
+  }
+]

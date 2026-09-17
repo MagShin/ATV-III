@@ -1,0 +1,99 @@
+<%- include('partials/header') %>
+
+<section aria-labelledby="titulo-estante">
+  <hgroup class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <h2 id="titulo-estante" class="text-2xl font-bold text-emerald-700">Meus Livros</h2>
+    <a href="/livros/novo"
+       class="mt-3 sm:mt-0 inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition">
+      + Cadastrar Livro
+    </a>
+  </hgroup>
+
+  <!-- Resumo da Estante (Desafio Extra 1) -->
+  <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+    <article class="bg-white rounded-lg shadow p-4 text-center">
+      <p class="text-sm text-gray-500">Total de Livros</p>
+      <p class="text-3xl font-bold text-emerald-700"><%= resumo.totalLivros %></p>
+    </article>
+    <article class="bg-white rounded-lg shadow p-4 text-center">
+      <p class="text-sm text-gray-500">Livros Concluídos</p>
+      <p class="text-3xl font-bold text-emerald-700"><%= resumo.totalLidos %></p>
+    </article>
+    <article class="bg-white rounded-lg shadow p-4 text-center">
+      <p class="text-sm text-gray-500">Páginas Lidas</p>
+      <p class="text-3xl font-bold text-emerald-700"><%= resumo.totalPaginasLidas %></p>
+    </article>
+  </section>
+
+  <% if (livros.length === 0) { %>
+    <p class="text-center text-gray-500 bg-white rounded-lg shadow p-8">
+      Nenhum livro cadastrado ainda. Que tal <a href="/livros/novo" class="text-emerald-700 underline">adicionar o primeiro</a>?
+    </p>
+  <% } else { %>
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full text-left">
+        <thead class="bg-emerald-50 text-emerald-800 uppercase text-xs">
+          <tr>
+            <th class="px-4 py-3">Título</th>
+            <th class="px-4 py-3">Autor</th>
+            <th class="px-4 py-3">Páginas</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Nota</th>
+            <th class="px-4 py-3">Ações</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <% livros.forEach((livro, index) => { %>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 font-medium"><%= livro.titulo %></td>
+              <td class="px-4 py-3"><%= livro.autor %></td>
+              <td class="px-4 py-3"><%= livro.paginas %></td>
+              <td class="px-4 py-3">
+                <span class="px-2 py-1 rounded-full text-xs font-semibold
+                  <%= livro.status === 'Lido' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+                  <%= livro.status %>
+                </span>
+              </td>
+              <td class="px-4 py-3">
+                <% if (livro.status === 'Lido') { %>
+                  <!-- Classificação por Estrelas (Desafio Extra 3) -->
+                  <form action="/livros/avaliar/<%= index %>" method="POST" class="flex items-center gap-1">
+                    <fieldset class="flex gap-1 border-0">
+                      <legend class="sr-only">Nota do livro</legend>
+                      <% for (let estrela = 1; estrela <= 5; estrela++) { %>
+                        <button type="submit" name="nota" value="<%= estrela %>"
+                                class="text-lg <%= estrela <= (livro.nota || 0) ? 'text-yellow-400' : 'text-gray-300' %> hover:text-yellow-400"
+                                aria-label="Dar nota <%= estrela %>">★</button>
+                      <% } %>
+                    </fieldset>
+                  </form>
+                <% } else { %>
+                  <span class="text-gray-400 text-sm">—</span>
+                <% } %>
+              </td>
+              <td class="px-4 py-3">
+                <menu class="flex gap-2 p-0 m-0">
+                  <li>
+                    <a href="/livros/status/<%= index %>"
+                       class="text-sm bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-md transition">
+                      <%= livro.status === 'Lido' ? 'Marcar como Lendo' : 'Marcar como Lido' %>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/livros/remover/<%= index %>"
+                       onclick="return confirm('Deseja excluir este livro da sua estante?')"
+                       class="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md transition">
+                      Remover
+                    </a>
+                  </li>
+                </menu>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

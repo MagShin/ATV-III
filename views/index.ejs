@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<article class="bg-white rounded-lg shadow-md p-8 text-center">
+  <figure class="mb-4">
+    <span class="text-6xl" role="img" aria-label="Livros">📖</span>
+  </figure>
+
+  <h2 class="text-3xl font-bold text-emerald-700 mb-2">Bem-vindo(a) à sua Estante!</h2>
+  <p class="text-gray-600 max-w-xl mx-auto mb-6">
+    Organize suas leituras, acompanhe o progresso dos livros que está lendo
+    e mantenha um histórico completo de tudo o que já leu — tudo em um só lugar.
+  </p>
+
+  <a href="/livros"
+     class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition">
+    Acessar minha estante →
+  </a>
+</article>
+
+<section class="grid sm:grid-cols-3 gap-4 mt-8">
+  <article class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-3xl">📥</p>
+    <h3 class="font-semibold mt-2">Cadastre</h3>
+    <p class="text-sm text-gray-500">Adicione novos livros à sua estante em segundos.</p>
+  </article>
+  <article class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-3xl">🔄</p>
+    <h3 class="font-semibold mt-2">Acompanhe</h3>
+    <p class="text-sm text-gray-500">Marque como "Lendo" ou "Lido" conforme avança.</p>
+  </article>
+  <article class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-3xl">⭐</p>
+    <h3 class="font-semibold mt-2">Avalie</h3>
+    <p class="text-sm text-gray-500">Dê notas aos livros que você já terminou.</p>
+  </article>
+</section>
+
+<%- include('partials/footer') %>
